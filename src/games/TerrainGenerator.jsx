@@ -18,7 +18,7 @@ const delay = 0;
 var radius = 5;
 var strictness = 5;
 var end = false;
-var timeInterval = 0;
+var timeInterval = null;
 
 const TerrainGenerator = () => {
   // const [probabilities, setProbabilities] = useState([0.25, 0.25, 0.25, 0.25]);
@@ -301,147 +301,225 @@ const TerrainGenerator = () => {
   };
 
   const startGenerator = () => {
-    createMyInterval();
+    if (timeInterval == null) {
+      createMyInterval();
+    }
   };
 
   const stopGenerator = () => {
     clearInterval(timeInterval);
+    timeInterval = null;
   };
 
   return (
-    <div className="flex flex-row m-2 gap-2">
-      <div
-        className={`h-[${viewPort}px] w-[${viewPort}px] `}
-        ref={inputRef}
-        onClick={startCollapse}
-      >
-        {gridArray?.map((row, rowNum) => (
-          <div
-            className={`flex  h-[${viewPort / grid}px] w-full`}
-            style={{ height: `${viewPort / grid}px` }}
-            key={rowNum}
-          >
-            {row?.map((block, colNum) => (
-              <div
-                className={`flex bg-black text-white justify-center content-center`}
-                style={{
-                  height: `${viewPort / grid}px`,
-                  width: `${viewPort / grid}px`,
-                }}
-                key={colNum}
-              >
-                {block.image ? (
-                  <img className="text-center align-middle" src={block.image} />
-                ) : // <img className="text-center align-middle" src={block.image} />
-                // <p className="size-fit m-auto">{`${block.row}-${block.col}`}</p>
-                null}
-              </div>
-            ))}
+    <div className="flex flex-col m-4 gap-6 justify-center max-lg:flex-col max-lg:content-center bg-gray-800 p-6 rounded-xl shadow-lg">
+      <div className="flex flex-row m-4 gap-6 justify-center max-lg:flex-col max-lg:content-center bg-gray-800 p-6 rounded-xl ">
+        {/* Grid Container */}
+        <div
+          className={`h-[${viewPort}px] w-[${viewPort}px] lg:mr-6 max-lg:m-auto cursor-pointer border-2 border-gray-700 rounded-lg shadow-inner bg-gray-900`}
+          ref={inputRef}
+          onClick={startCollapse}
+        >
+          {gridArray?.map((row, rowNum) => (
+            <div
+              className={`flex w-full`}
+              style={{ height: `${viewPort / grid}px` }}
+              key={rowNum}
+            >
+              {row?.map((block, colNum) => (
+                <div
+                  className="flex items-center justify-center bg-black  text-white"
+                  style={{
+                    height: `${viewPort / grid}px`,
+                    width: `${viewPort / grid}px`,
+                  }}
+                  key={colNum}
+                >
+                  {block.image ? (
+                    <img
+                      className="max-h-full max-w-full object-contain"
+                      src={block.image}
+                      alt=""
+                    />
+                  ) : null}
+                </div>
+              ))}
+            </div>
+          ))}
+        </div>
+
+        {/* Control Panel */}
+        <div className="max-lg:justify-center mt-4 w-full max-w-lg bg-gray-900 p-6 rounded-xl shadow-lg">
+          <div className="py-4 text-white w-full text-xl text-center">
+            Adjust the Parameters:
           </div>
-        ))}
-      </div>
-      <div>
-        <div className="">
-          <div className="flex flex-col gap-2 w-[200px]">
-            <div className="flex gap-2">
-              <img className="size-[70px]" src={image1} />
-              <label className="hidden" htmlFor="tree-probability">
-                Tree probability
-              </label>
-              <input
-                name="tree-probability"
-                className="px-2 py-1 w-full border-black border-[1px] outline-none rounded-lg"
-                type="text"
-                ref={(el) => (formInputRefs.current[0] = el)}
-                defaultValue={0.25}
-              />
-            </div>
-            <div className="flex gap-2 ">
-              <img className="size-[70px]" src={image2} />
-              <label className="hidden" htmlFor="grass-probability">
-                Grass probability
-              </label>
-              <input
-                name="grass-probability"
-                className="px-2 py-1 w-full border-black border-[1px] outline-none rounded-lg"
-                type="text"
-                ref={(el) => (formInputRefs.current[1] = el)}
-                defaultValue={0.25}
-              />
-            </div>
-            <div className="flex gap-2">
-              <img className="size-[70px]" src={image3} />
-              <label className="hidden" htmlFor="sand-probability">
-                Sand probability
-              </label>
-              <input
-                name="sand-probability"
-                className="px-2 py-1 w-full border-black border-[1px] outline-none rounded-lg"
-                type="text"
-                ref={(el) => (formInputRefs.current[2] = el)}
-                defaultValue={0.25}
-              />
-            </div>
-            <div className="flex gap-2">
-              <img className="size-[70px]" src={image4} onClick={verifyForm} />
-              <label className="hidden" htmlFor="water-probability">
-                Water probability
-              </label>
-              <input
-                name="water-probability"
-                className="px-2 py-1 w-full border-black border-[1px] outline-none rounded-lg"
-                type="text"
-                ref={(el) => (formInputRefs.current[3] = el)}
-                defaultValue={0.25}
-              />
+
+          {/* Probability Inputs */}
+          <div className="flex flex-col gap-4">
+            {/* Row 1 */}
+            <div className="flex flex-row gap-4">
+              {[
+                { label: "Tree", src: image1, refIndex: 0, defaultValue: 0.25 },
+                {
+                  label: "Grass",
+                  src: image2,
+                  refIndex: 1,
+                  defaultValue: 0.25,
+                },
+              ].map((item, index) => (
+                <div
+                  key={index}
+                  className="flex w-[50%] pl-[50px]  items-center gap-3"
+                >
+                  <img
+                    className="w-12 h-12"
+                    src={item.src}
+                    alt={`${item.label} Icon`}
+                  />
+                  <input
+                    name={`${item.label.toLowerCase()}-probability`}
+                    className="px-3 py-2 ml-[15px] w-20 border-none outline-none rounded-lg bg-purple-200 text-center"
+                    type="text"
+                    ref={(el) => (formInputRefs.current[item.refIndex] = el)}
+                    defaultValue={item.defaultValue}
+                  />
+                </div>
+              ))}
             </div>
 
-            <div className="flex gap-2">
-              <label htmlFor="strictness" className="w-[70px] flex-shrink-0">
-                Strictness
-              </label>
-              <input
-                name="strictness"
-                className="px-2 py-1 w-full border-black border-[1px] outline-none rounded-lg"
-                defaultValue={5}
-                ref={(el) => (formInputRefs.current[4] = el)}
-                type="text"
-              />
+            {/* Row 2 */}
+            <div className="flex flex-row gap-4">
+              {[
+                { label: "Sand", src: image3, refIndex: 2, defaultValue: 0.25 },
+                {
+                  label: "Water",
+                  src: image4,
+                  refIndex: 3,
+                  defaultValue: 0.25,
+                },
+              ].map((item, index) => (
+                <div
+                  key={index}
+                  className="flex w-[50%] pl-[50px] items-center gap-3"
+                >
+                  <img
+                    className="w-12 h-12"
+                    src={item.src}
+                    alt={`${item.label} Icon`}
+                  />
+                  <input
+                    name={`${item.label.toLowerCase()}-probability`}
+                    className="px-3 py-2 ml-[15px] w-20 border-none outline-none rounded-lg bg-purple-200 text-center"
+                    type="text"
+                    ref={(el) => (formInputRefs.current[item.refIndex] = el)}
+                    defaultValue={item.defaultValue}
+                  />
+                </div>
+              ))}
             </div>
-            <div className="flex gap-2">
-              <label htmlFor="radius" className="w-[70px] flex-shrink-0">
-                Radius
-              </label>
-              <input
-                name="radius"
-                className="px-2 py-1 w-full border-black border-[1px] outline-none rounded-lg"
-                defaultValue={5}
-                ref={(el) => (formInputRefs.current[5] = el)}
-                type="text"
-              />
+
+            {/* Strictness and Radius */}
+            <div className="flex flex-row gap-4">
+              {[
+                { label: "Strictness", refIndex: 4, defaultValue: 5 },
+                { label: "Radius", refIndex: 5, defaultValue: 5 },
+              ].map((item, index) => (
+                <div
+                  key={index}
+                  className="flex w-[50%] justify-center items-center gap-3"
+                >
+                  <label
+                    htmlFor={item.label.toLowerCase()}
+                    className="text-white w-24 text-right"
+                  >
+                    {item.label}:
+                  </label>
+                  <input
+                    name={item.label.toLowerCase()}
+                    className="px-3 py-2 w-20 border-none outline-none rounded-[20px] bg-purple-200 text-center"
+                    type="text"
+                    ref={(el) => (formInputRefs.current[item.refIndex] = el)}
+                    defaultValue={item.defaultValue}
+                  />
+                </div>
+              ))}
             </div>
           </div>
+
+          {/* Buttons */}
+          <div className="flex flex-col gap-4 mt-6">
+            <div className="flex flex-row gap-4">
+              <input
+                className="w-full bg-gradient-to-r from-green-400 to-green-600 text-white font-medium  rounded-[20px] px-6 py-2 shadow-md hover:shadow-lg hover:from-green-500 hover:to-green-700 focus:outline-none "
+                type="button"
+                value={"Start"}
+                onClick={() => startGenerator()}
+              />
+
+              <input
+                className="w-full bg-yellow-400 text-gray-900 font-medium  border border-yellow-500 rounded-[20px] px-6 py-2 shadow-md hover:shadow-lg hover:bg-yellow-500 focus:outline-none  "
+                type="button"
+                value={"Stop"}
+                onClick={() => stopGenerator()}
+              />
+            </div>
+            <input
+              className="w-full bg-gradient-to-r rounded-[20px] from-red-500 to-red-700 text-white font-medium  border border-red-700  px-6 py-2 shadow-md hover:shadow-lg hover:from-red-600 hover:to-red-800"
+              type="button"
+              value={"Restart"}
+              onClick={() => restartGenerator()}
+            />
+          </div>
         </div>
-        <div className="flex flex-col mt-2 gap-1 w-[200px]">
-          <input
-            className="bg-red-300  px-2 py-1"
-            type="button"
-            value={"Restart"}
-            onClick={() => restartGenerator()}
-          />
-          <input
-            className="bg-green-300  px-2 py-1"
-            type="button"
-            value={"Start"}
-            onClick={() => startGenerator()}
-          />
-          <input
-            className="bg-yellow-300  px-2 py-1"
-            type="button"
-            value={"Stop"}
-            onClick={() => stopGenerator()}
-          />
-        </div>
+      </div>
+      <div className="w-auto h-auto px-[60px] py-[40px] mx-[60px] mb-[40px] bg-gray-900 text-white rounded-xl shadow-md">
+        <h2 className="text-xl font-semibold mb-4">
+          Input Parameters Description
+        </h2>
+        <ul className="space-y-4">
+          <li>
+            <strong>Tree Probability:</strong>
+            <span className="ml-2 text-gray-200">
+              This parameter controls the likelihood of generating trees in the
+              grid. Enter a value between 0 and 1.
+            </span>
+          </li>
+          <li>
+            <strong>Grass Probability:</strong>
+            <span className="ml-2 text-gray-200">
+              Determines the probability of grass generation. Accepts values
+              between 0 and 1.
+            </span>
+          </li>
+          <li>
+            <strong>Sand Probability:</strong>
+            <span className="ml-2 text-gray-200">
+              Sets the probability of sand tiles appearing in the grid. Provide
+              a decimal value between 0 and 1.
+            </span>
+          </li>
+          <li>
+            <strong>Water Probability:</strong>
+            <span className="ml-2 text-gray-200">
+              Specifies how likely water tiles will be created. Enter a value
+              ranging from 0 to 1.
+            </span>
+          </li>
+          <li>
+            <strong>Strictness:</strong>
+            <span className="ml-2 text-gray-200">
+              Controls the rigor of the collapse process. Higher values increase
+              strictness.
+            </span>
+          </li>
+          <li>
+            <strong>Radius:</strong>
+            <span className="ml-2 text-gray-200">
+              Defines the area of effect around a point during collapse. Higher
+              values expand the radius.
+            </span>
+          </li>
+        </ul>
       </div>
     </div>
   );
