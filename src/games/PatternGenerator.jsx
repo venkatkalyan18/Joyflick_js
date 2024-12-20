@@ -262,12 +262,14 @@ const PatternGenrator = () => {
   };
 
   const start = () => {
-    const time = setInterval(() => {
-      if (end) clearInterval(time);
-      input.current.click();
-    }, delay);
-    myTimeInterval = time;
-    //setTimeInterval(time);
+    if (myTimeInterval == null) {
+      const time = setInterval(() => {
+        if (end) clearInterval(time);
+        input.current.click();
+      }, delay);
+      myTimeInterval = time;
+      //setTimeInterval(time);
+    }
   };
 
   const pause = () => {
