@@ -297,7 +297,7 @@ const PatternGenrator = () => {
 
   return (
     <>
-      <div className="flex flex-row">
+      <div className="flex flex-row justify-center items-center min-h-[92vh]">
         <div
           ref={input}
           className={`h-[${viewPort}px] w-[${viewPort}px] `}

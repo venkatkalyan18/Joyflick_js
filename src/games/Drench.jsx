@@ -1,8 +1,9 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import DialogBox from "../components/DialogBox.jsx";
-
-
+import audio from "../assets/mixkit-modern-technology-select-3124.wav"
+import gameOverAudio from "../assets/273569-Game-over2.wav"
+import gameWonAudio from "../assets/403300-Fast_Orchestral_WIN_Celebration_or_Reveal_Sting_02_003878_.wav";
 
 
 const Drench = () => {
@@ -18,10 +19,10 @@ const Drench = () => {
   const [isOpen2, setIsOpen2] = useState(null);
   const [recordMoves, setRecordMovers] = useState(null);
 
-  const gameOverAudio = new Audio("/273569-Game-over2.wav");
-  const gameWonAudio = new Audio(
-    "/403300-Fast_Orchestral_WIN_Celebration_or_Reveal_Sting_02_003878_.wav"
-  );
+//   const gameOverAudio = new Audio("/273569-Game-over2.wav");
+//   const gameWonAudio = new Audio(
+//     "/403300-Fast_Orchestral_WIN_Celebration_or_Reveal_Sting_02_003878_.wav"
+//   );
 
   const getRandomNumbers = () => {
     return Math.floor(Math.random() * 6) + 1;
@@ -68,8 +69,8 @@ const Drench = () => {
   };
 
   const handleChangedfs = (colorChoosed) => {
-    const audio = new Audio("/mixkit-modern-technology-select-3124.wav");
-    audio.play();
+    // const audio = new Audio("/mixkit-modern-technology-select-3124.wav");
+    new Audio(audio).play();
     let visitedArray = [...isVisited];
     let boardArray = [...array];
     let queue = [];
@@ -99,7 +100,7 @@ const Drench = () => {
     helper(visitedArray, boardArray, isVisitedArray, 0, 0, colorChoosed);
     if (isWin(boardArray, colorChoosed)) {
       setGameWon(true);
-      gameWonAudio.play();
+      new Audio(gameWonAudio).play();
     }
     setIsVisited(visitedArray);
     setArray(boardArray);
@@ -108,7 +109,7 @@ const Drench = () => {
 
   useEffect(() => {
     if (noofMoves == 0 && !gameWon) {
-      gameOverAudio.play();
+      new Audio(gameOverAudio).play();
     }
   }, [noofMoves]);
 
@@ -167,16 +168,16 @@ const Drench = () => {
   };
 
   const reset = () => {
-    gameOverAudio.pause();
-    gameWonAudio.pause();
+    new Audio(gameOverAudio).pause();
+    new Audio(gameWonAudio).pause();
     fillRandomNumbersInArray();
     setGameWon(false);
     setNoOfMoves(30);
   };
 
   useEffect(() => {
-    gameOverAudio.pause();
-    gameWonAudio.pause();
+    new Audio(gameOverAudio).pause();
+    new Audio(gameWonAudio).pause();
     fillRandomNumbersInArray();
   }, []);
 
