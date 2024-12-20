@@ -299,67 +299,69 @@ const PatternGenrator = () => {
 
   return (
     <>
-      <div className="flex flex-row justify-center items-center min-h-[92vh]">
+      <div className="flex flex-row justify-center p-5 items-center min-h-[92vh] bg-background1 text-white">
         <div
           ref={input}
-          className={`h-[${viewPort}px] w-[${viewPort}px] `}
+          className={`h-[${viewPort}px] w-[${viewPort}px]  rounded-md shadow-lg overflow-hidden`}
           onClick={() => startCollapse()}
         >
           {gridArray?.map((row, rowIndex) => (
             <div
               key={rowIndex}
-              className={`flex w-full bg-black-400`}
+              className="flex w-full bg-gray-700"
               style={{ height: `${viewPort / grid}px` }}
             >
               {row.map((tile, colIndex) => (
                 <div
                   key={colIndex}
-                  className={`h-full bg-black text-[8px] text-center text-white`}
+                  className="h-full bg-gray-900  text-[8px] text-center flex items-center justify-center"
                   style={{ width: `${viewPort / grid}px` }}
                 >
                   {tile.image !== null ? (
                     <img
                       src={tile.image}
                       alt={`Tile ${rowIndex}-${colIndex}`}
-                      className="h-full w-full object-cover "
+                      className="h-full w-full object-cover"
                     />
-                  ) : // tile.possibilities[0]
-                  null}
+                  ) : null}
                 </div>
               ))}
             </div>
           ))}
         </div>
-        <div className="flex flex-col gap-2 mx-2">
+
+        <div className="flex flex-col gap-4 ml-4">
           <input
-            className="px-5 py-2 bg-red-400"
+            className="px-5 py-2 bg-red-500 hover:bg-red-600 text-white font-bold rounded shadow-md cursor-pointer transition-all duration-300"
             type="button"
-            value={"restart"}
+            value="Restart"
             onClick={restart}
           />
           <input
-            className="px-5 py-2 bg-green-400"
+            className="px-5 py-2 bg-green-500 hover:bg-green-600 text-white font-bold rounded shadow-md cursor-pointer transition-all duration-300"
             type="button"
-            value={"start"}
+            value="Start"
             onClick={start}
           />
           <input
-            className="px-5 py-2 bg-yellow-400"
+            className="px-5 py-2 bg-yellow-500 hover:bg-yellow-600 text-white font-bold rounded shadow-md cursor-pointer transition-all duration-300"
             type="button"
-            value={"pause"}
+            value="Pause"
             onClick={pause}
           />
+          {/* Uncomment if grid size selection is needed */}
           {/* <select
-            name="grid-size"
-            onChange={(e) => {
-              setGrid(e.target.value);
-              reset();
-            }}
-          >
-            <option value={10}>10</option>
-            <option value={25}>25</option>
-            <option value={50}>50</option>
-          </select> */}
+      name="grid-size"
+      className="px-4 py-2 bg-gray-700 text-white border border-gray-600 rounded shadow-md focus:ring-2 focus:ring-blue-500"
+      onChange={(e) => {
+        setGrid(e.target.value);
+        reset();
+      }}
+    >
+      <option value={10}>10</option>
+      <option value={25}>25</option>
+      <option value={50}>50</option>
+    </select> */}
         </div>
       </div>
     </>
