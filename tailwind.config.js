@@ -7,6 +7,12 @@ export default {
   ],
   theme: {
   	extend: {
+      gridTemplateRows: {
+        '14': 'repeat(14, minmax(0, 1fr))'
+      },
+      gridTemplateColumns: {
+        '14': 'repeat(14, minmax(0, 1fr))'
+      },
   		borderRadius: {
   			lg: 'var(--radius)',
   			md: 'calc(var(--radius) - 2px)',
@@ -43,6 +49,7 @@ export default {
   				DEFAULT: 'hsl(var(--destructive))',
   				foreground: 'hsl(var(--destructive-foreground))'
   			},
+        
   			border: 'hsl(var(--border))',
   			input: 'hsl(var(--input))',
   			ring: 'hsl(var(--ring))',
