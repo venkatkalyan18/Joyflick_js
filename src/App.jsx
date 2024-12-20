@@ -5,12 +5,14 @@ import PatternGenrator from "./games/PatternGenerator";
 import TerrainGenerator from "./games/TerrainGenerator";
 import FlipFind from "./games/FlipFind";
 import SandBox from "./games/SandSimulator";
+import Hero from "./components/Hero";
 
 export default function App() {
   return (
-    <div>
+    <div className="bg-background1">
       <Navbar />
       <Routes>
+        <Route path="/" element={<Hero />} />
         <Route path="/drench" element={<Drench />} />
         <Route path="/Pattern-generator" element={<PatternGenrator />} />
         <Route path="/terrain-generator" element={<TerrainGenerator />} />
