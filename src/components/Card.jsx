@@ -1,12 +1,15 @@
 import React from "react";
 import "./Card.css"; // Import the CSS file
 
-const Card = () => {
+const Card = ({ children, image }) => {
   return (
-    <div class="card">
-      <p class="heading">Popular this month</p>
-      <p>Powered By</p>
-      <p>Uiverse</p>
+    /* From Uiverse.io by htwarriors108 */
+    <div className="card">
+      <span></span>
+      <span className="image-container">
+        <img src={image} alt={children} className="card-image" />
+      </span>
+      <div className="content">{children}</div>
     </div>
   );
 };

@@ -42,9 +42,6 @@ const Navbar = () => {
             <Link to="/">Home</Link> {/* Use Link from react-router-dom */}
           </li>
           <li>
-            <Link to="/games">Games</Link>
-          </li>
-          <li>
             <Link to="/">Help</Link>
           </li>
         </ul>

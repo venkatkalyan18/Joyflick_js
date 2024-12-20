@@ -1,10 +1,8 @@
-
 import React, { useEffect, useRef, useState } from "react";
 import DialogBox from "../components/DialogBox.jsx";
-import audio from "../assets/mixkit-modern-technology-select-3124.wav"
-import gameOverAudio from "../assets/273569-Game-over2.wav"
+import audio from "../assets/mixkit-modern-technology-select-3124.wav";
+import gameOverAudio from "../assets/273569-Game-over2.wav";
 import gameWonAudio from "../assets/403300-Fast_Orchestral_WIN_Celebration_or_Reveal_Sting_02_003878_.wav";
-
 
 const Drench = () => {
   const [noofMoves, setNoOfMoves] = useState(30);
@@ -19,10 +17,10 @@ const Drench = () => {
   const [isOpen2, setIsOpen2] = useState(null);
   const [recordMoves, setRecordMovers] = useState(null);
 
-//   const gameOverAudio = new Audio("/273569-Game-over2.wav");
-//   const gameWonAudio = new Audio(
-//     "/403300-Fast_Orchestral_WIN_Celebration_or_Reveal_Sting_02_003878_.wav"
-//   );
+  //   const gameOverAudio = new Audio("/273569-Game-over2.wav");
+  //   const gameWonAudio = new Audio(
+  //     "/403300-Fast_Orchestral_WIN_Celebration_or_Reveal_Sting_02_003878_.wav"
+  //   );
 
   const getRandomNumbers = () => {
     return Math.floor(Math.random() * 6) + 1;
@@ -182,7 +180,7 @@ const Drench = () => {
   }, []);
 
   return (
-    <section className="min-h-[92vh] min-screen flex justify-center items-center overflow-x-hidden bg-gray-200 p-2">
+    <section className="min-h-[92vh] min-screen flex justify-center items-center overflow-x-hidden bg- p-2">
       <div className="flex justify-center items-center gap-4  max-md:flex-col">
         <div className="grid  grid-rows-14 grid-cols-14 w-fit shadow-2xl relative">
           {gameWon ? (
@@ -234,7 +232,7 @@ const Drench = () => {
           )}
         </div>
 
-        <div className="flex flex-col gap-4 p-5 h-full bg-black bg-opacity-20 shadow-2xl w-[300px] max-sm:w-[280px]">
+        <div className="flex flex-col gap-4 p-5 h-full bg-[#3c264c]  shadow-2xl w-[300px] max-sm:w-[280px]">
           {/* <div className="flex flex-col gap-1 w-full max-sm:text-sm">
             <div className="flex gap-1">
               <p className="">
@@ -261,10 +259,10 @@ const Drench = () => {
             </p>
           </div> */}
           <div className="flex gap-5 ml-4 max-sm:gap-4">
-            <div className="text-6xl max-sm:text-5xl  bg-black text-white p-4  min-w-20 text-center min-h-20">
+            <div className="text-6xl max-sm:text-5xl  bg-[#5a2a7c] text-white p-4  min-w-20 text-center min-h-20">
               {noofMoves}
             </div>
-            <p className="text-xl max-sm:text-lg font-bold">
+            <p className="text-xl max-sm:text-lg font-bold text-white">
               Moves to <br /> Drench the <br />
               board
             </p>
@@ -326,4 +324,4 @@ const Drench = () => {
   );
 };
 
-export default  Drench ;
+export default Drench;

@@ -364,6 +364,82 @@ const PatternGenrator = () => {
     </select> */}
         </div>
       </div>
+      <div className="w-auto h-auto px-[60px] py-[40px] mx-[60px] bg-gray-900 text-white rounded-xl shadow-md">
+        <h1 className="text-2xl font-bold mb-4">
+          Wave Function Collapse (WFC) Algorithm
+        </h1>
+        <p className="mb-4">
+          The Wave Function Collapse (WFC) algorithm is a procedural content
+          generation technique widely used in games, design tools, and visual
+          simulations. It generates patterns or structures by collapsing a grid
+          of possibilities based on constraints defined by adjacent tiles. This
+          ensures that the final pattern adheres to predefined rules and avoids
+          conflicts. In this generator, we use{" "}
+          <strong>18 unique images </strong>
+          to create diverse and visually appealing patterns.
+        </p>
+        <h2 className="text-xl font-semibold mb-2">Key Concepts:</h2>
+        <ul className="list-disc list-inside mb-4">
+          <li>
+            <strong>Grid and Tiles:</strong> The grid is composed of individual
+            tiles. Each tile can have multiple possible states (images or
+            patterns).
+          </li>
+          <li>
+            <strong>Possibilities:</strong> Tiles start with all possible
+            patterns. As constraints are applied, invalid possibilities are
+            removed.
+          </li>
+          <li>
+            <strong>Connectors:</strong> Connectors define how tiles can connect
+            to each other. For example, "aaa" can connect to "aba" but not to
+            "bbb."
+          </li>
+          <li>
+            <strong>Collapse:</strong> A tile collapses when its state is
+            finalized, and this state influences adjacent tiles by reducing
+            their possibilities.
+          </li>
+        </ul>
+        <h2 className="text-xl font-semibold mb-2">
+          Pattern Generation Process:
+        </h2>
+        <div className="ml-4 mb-4">
+          <ol className="list-decimal list-inside">
+            <li>
+              <strong>Initialization:</strong> A grid of tiles is created, where
+              each tile starts with all possible patterns.
+            </li>
+            <li>
+              <strong>Tile Selection:</strong> A tile with the fewest
+              possibilities is chosen (preferably one with constraints applied).
+            </li>
+            <li>
+              <strong>State Assignment:</strong> A random valid pattern is
+              selected for the tile based on its remaining possibilities.
+            </li>
+            <li>
+              <strong>Propagation:</strong> The constraints of the collapsed
+              tile are propagated to adjacent tiles, reducing their
+              possibilities.
+            </li>
+            <li>
+              <strong>Repeat:</strong> The process continues until all tiles are
+              collapsed or no valid configurations remain.
+            </li>
+          </ol>
+        </div>
+        <h2 className="text-xl font-semibold mb-2">Applications:</h2>
+        <p>
+          The WFC algorithm is ideal for generating infinite, non-repetitive
+          patterns such as:
+        </p>
+        <ul className="list-disc list-inside">
+          <li>Procedural terrains in games.</li>
+          <li>Custom wallpaper or texture generation.</li>
+          <li>Level designs with consistent constraints.</li>
+        </ul>
+      </div>
     </>
   );
 };

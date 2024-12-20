@@ -15,7 +15,7 @@ const SandBox = () => {
     6: "bg-orange-500",
     7: "bg-red-500",
   });
-  const [color, setColor] = useState(0);
+  const [color, setColor] = useState("0");
 
   useEffect(() => {
     let array = new Array(pixels).fill().map(() => new Array(pixels).fill(0));
@@ -105,6 +105,9 @@ const SandBox = () => {
 
   return (
     <div className="flex flex-col items-center bg-background1 min-h-screen py-6">
+      <div className="text-white p-2 text-xl">
+        <h1>Choose colors and drag mouse over the box to drop sands!!!</h1>
+      </div>
       {/* Sand Canvas */}
       <div
         className="bg-black rounded-md shadow-lg"
