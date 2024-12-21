@@ -14,7 +14,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Hero />} />
         <Route path="/drench" element={<Drench />} />
-        <Route path="/Pattern-generator" element={<PatternGenrator />} />
+        <Route path="/pattern-generator" element={<PatternGenrator />} />
         <Route path="/terrain-generator" element={<TerrainGenerator />} />
         <Route path="/flip-find" element={<FlipFind />} />
         <Route path="/sand-box" element={<SandBox />} />

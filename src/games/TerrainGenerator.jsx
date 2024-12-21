@@ -295,7 +295,7 @@ const TerrainGenerator = () => {
     for (let i = 0; i < 4; i++) {
       probabilities[i] = parseFloat(formInputRefs.current[i].value);
     }
-    console.log(probabilities);
+    //console.log(probabilities);
     strictness = parseInt(formInputRefs.current[4].value);
     radius = parseInt(formInputRefs.current[5].value);
   };
@@ -312,7 +312,7 @@ const TerrainGenerator = () => {
   };
 
   return (
-    <div className="flex flex-col m-4 gap-6 justify-center max-lg:flex-col max-lg:content-center bg-gray-800 p-6 rounded-xl shadow-lg">
+    <div className="flex flex-col  gap-6 justify-center max-lg:flex-col max-lg:content-center bg-background1 p-6 rounded-xl shadow-lg">
       <div className="flex flex-row m-4 gap-6 justify-center max-lg:flex-col max-lg:content-center bg-gray-800 p-6 rounded-xl ">
         {/* Grid Container */}
         <div
@@ -472,7 +472,7 @@ const TerrainGenerator = () => {
           </div>
         </div>
       </div>
-      <div className="w-auto h-auto px-[60px] py-[40px] mx-[60px] mb-[40px] bg-gray-900 text-white rounded-xl shadow-md">
+      <div className="w-auto h-auto px-[60px] py-[40px] mx-[60px] bg-gray-900 text-white rounded-xl shadow-md">
         <h2 className="text-xl font-semibold mb-4">
           Input Parameters Description
         </h2>
@@ -508,8 +508,8 @@ const TerrainGenerator = () => {
           <li>
             <strong>Strictness:</strong>
             <span className="ml-2 text-gray-200">
-              Controls the rigor of the collapse process. Higher values increase
-              strictness.
+              Controls the rigor of the collapse process. 1 for maximum
+              strictness, 2 for half and so on.
             </span>
           </li>
           <li>

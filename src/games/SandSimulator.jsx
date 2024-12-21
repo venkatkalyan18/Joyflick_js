@@ -15,7 +15,7 @@ const SandBox = () => {
     6: "bg-orange-500",
     7: "bg-red-500",
   });
-  const [color, setColor] = useState(0);
+  const [color, setColor] = useState("0");
 
   useEffect(() => {
     let array = new Array(pixels).fill().map(() => new Array(pixels).fill(0));
@@ -91,7 +91,7 @@ const SandBox = () => {
     let newArray = sandArray.map((row) => row.slice());
 
     // randomly add color
-    if (color === 0) {
+    if (color === "0") {
       newArray[rowIndex][colIndex] = Math.floor(Math.random() * 7) + 1;
     } else {
       newArray[rowIndex][colIndex] = color; // add color based on the input color
@@ -104,11 +104,18 @@ const SandBox = () => {
   };
 
   return (
-    <div>
+    <div className="flex flex-col items-center bg-background1 min-h-screen py-6">
+      <div className="text-white p-2 text-xl">
+        <h1>Choose colors and drag mouse over the box to drop sands!!!</h1>
+      </div>
+      {/* Sand Canvas */}
       <div
-        className="bg-black"
-        style={{ width: `${viewPort}px`, height: `${viewPort}px` }}
-        onMouseUp={handleMouseUp} // Ensure dragging stops when mouse is released
+        className="bg-black rounded-md shadow-lg"
+        style={{
+          width: `${viewPort}px`,
+          height: `${viewPort}px`,
+        }}
+        onMouseUp={handleMouseUp}
       >
         {sandArray.map((row, rowIndex) => (
           <div
@@ -121,7 +128,7 @@ const SandBox = () => {
                 key={`${rowIndex}-${colIndex}`}
                 onMouseDown={() => handleMouseDown(rowIndex, colIndex)}
                 onMouseEnter={() => handleMouseEnter(rowIndex, colIndex)}
-                className={cell !== 0 ? colors[cell] : "bg-black"} // set color if cell has sand
+                className={cell !== 0 ? colors[cell] : "bg-black"}
                 style={{
                   width: `${viewPort / pixels}px`,
                   height: `${viewPort / pixels}px`,
@@ -132,45 +139,50 @@ const SandBox = () => {
         ))}
       </div>
 
-      {/* input color */}
-      <div className="flex flex-row w-fit px-4 py-4 gap-2">
+      {/* Color Palette */}
+      <div className="flex flex-row justify-center mt-4 px-4 py-4 gap-4 bg-gray-800 rounded-md shadow-md">
         <div
           id="1"
-          name="1"
-          className={`h-8 w-8 ${colors[1]} cursor-pointer`}
+          className={`h-10 w-10 rounded cursor-pointer border-2 border-transparent hover:border-white ${colors[1]}`}
           onClick={handleColorChange}
         ></div>
         <div
           id="2"
-          className={`h-8 w-8 ${colors[2]} cursor-pointer`}
+          className={`h-10 w-10 rounded cursor-pointer border-2 border-transparent hover:border-white ${colors[2]}`}
           onClick={handleColorChange}
         ></div>
         <div
           id="3"
-          className={`h-8 w-8 ${colors[3]} cursor-pointer`}
+          className={`h-10 w-10 rounded cursor-pointer border-2 border-transparent hover:border-white ${colors[3]}`}
           onClick={handleColorChange}
         ></div>
         <div
           id="4"
-          className={`h-8 w-8 ${colors[4]} cursor-pointer`}
+          className={`h-10 w-10 rounded cursor-pointer border-2 border-transparent hover:border-white ${colors[4]}`}
           onClick={handleColorChange}
         ></div>
         <div
           id="5"
-          className={`h-8 w-8 ${colors[5]} cursor-pointer`}
+          className={`h-10 w-10 rounded cursor-pointer border-2 border-transparent hover:border-white ${colors[5]}`}
           onClick={handleColorChange}
         ></div>
         <div
           id="6"
-          className={`h-8 w-8 ${colors[6]} cursor-pointer`}
+          className={`h-10 w-10 rounded cursor-pointer border-2 border-transparent hover:border-white ${colors[6]}`}
           onClick={handleColorChange}
         ></div>
         <div
           id="7"
-          className={`h-8 w-8 ${colors[7]} cursor-pointer`}
+          className={`h-10 w-10 rounded cursor-pointer border-2 border-transparent hover:border-white ${colors[7]}`}
           onClick={handleColorChange}
         ></div>
-        <div className={`h-8  bg-white px-2`}> random</div>
+        <div
+          id="0"
+          className="h-10 w-fit px-3 bg-white text-black font-semibold text-sm flex items-center justify-center rounded cursor-pointer shadow-md hover:bg-gray-200"
+          onClick={handleColorChange}
+        >
+          Random
+        </div>
       </div>
     </div>
   );

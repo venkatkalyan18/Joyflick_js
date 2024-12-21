@@ -299,68 +299,146 @@ const PatternGenrator = () => {
 
   return (
     <>
-      <div className="flex flex-row justify-center items-center min-h-[92vh]">
+      <div className="flex flex-row justify-center p-5 items-center min-h-[92vh] bg-background1 text-white">
         <div
           ref={input}
-          className={`h-[${viewPort}px] w-[${viewPort}px] `}
+          className={`h-[${viewPort}px] w-[${viewPort}px]  rounded-md shadow-lg overflow-hidden`}
           onClick={() => startCollapse()}
         >
           {gridArray?.map((row, rowIndex) => (
             <div
               key={rowIndex}
-              className={`flex w-full bg-black-400`}
+              className="flex w-full bg-gray-700"
               style={{ height: `${viewPort / grid}px` }}
             >
               {row.map((tile, colIndex) => (
                 <div
                   key={colIndex}
-                  className={`h-full bg-black text-[8px] text-center text-white`}
+                  className="h-full bg-gray-900  text-[8px] text-center flex items-center justify-center"
                   style={{ width: `${viewPort / grid}px` }}
                 >
                   {tile.image !== null ? (
                     <img
                       src={tile.image}
                       alt={`Tile ${rowIndex}-${colIndex}`}
-                      className="h-full w-full object-cover "
+                      className="h-full w-full object-cover"
                     />
-                  ) : // tile.possibilities[0]
-                  null}
+                  ) : null}
                 </div>
               ))}
             </div>
           ))}
         </div>
-        <div className="flex flex-col gap-2 mx-2">
+
+        <div className="flex flex-col gap-4 ml-4">
           <input
-            className="px-5 py-2 bg-red-400"
+            className="px-5 py-2 bg-red-500 hover:bg-red-600 text-white font-bold rounded shadow-md cursor-pointer transition-all duration-300"
             type="button"
-            value={"restart"}
+            value="Restart"
             onClick={restart}
           />
           <input
-            className="px-5 py-2 bg-green-400"
+            className="px-5 py-2 bg-green-500 hover:bg-green-600 text-white font-bold rounded shadow-md cursor-pointer transition-all duration-300"
             type="button"
-            value={"start"}
+            value="Start"
             onClick={start}
           />
           <input
-            className="px-5 py-2 bg-yellow-400"
+            className="px-5 py-2 bg-yellow-500 hover:bg-yellow-600 text-white font-bold rounded shadow-md cursor-pointer transition-all duration-300"
             type="button"
-            value={"pause"}
+            value="Pause"
             onClick={pause}
           />
+          {/* Uncomment if grid size selection is needed */}
           {/* <select
-            name="grid-size"
-            onChange={(e) => {
-              setGrid(e.target.value);
-              reset();
-            }}
-          >
-            <option value={10}>10</option>
-            <option value={25}>25</option>
-            <option value={50}>50</option>
-          </select> */}
+      name="grid-size"
+      className="px-4 py-2 bg-gray-700 text-white border border-gray-600 rounded shadow-md focus:ring-2 focus:ring-blue-500"
+      onChange={(e) => {
+        setGrid(e.target.value);
+        reset();
+      }}
+    >
+      <option value={10}>10</option>
+      <option value={25}>25</option>
+      <option value={50}>50</option>
+    </select> */}
         </div>
+      </div>
+      <div className="w-auto h-auto px-[60px] py-[40px] mx-[60px] bg-gray-900 text-white rounded-xl shadow-md">
+        <h1 className="text-2xl font-bold mb-4">
+          Wave Function Collapse (WFC) Algorithm
+        </h1>
+        <p className="mb-4">
+          The Wave Function Collapse (WFC) algorithm is a procedural content
+          generation technique widely used in games, design tools, and visual
+          simulations. It generates patterns or structures by collapsing a grid
+          of possibilities based on constraints defined by adjacent tiles. This
+          ensures that the final pattern adheres to predefined rules and avoids
+          conflicts. In this generator, we use{" "}
+          <strong>18 unique images </strong>
+          to create diverse and visually appealing patterns.
+        </p>
+        <h2 className="text-xl font-semibold mb-2">Key Concepts:</h2>
+        <ul className="list-disc list-inside mb-4">
+          <li>
+            <strong>Grid and Tiles:</strong> The grid is composed of individual
+            tiles. Each tile can have multiple possible states (images or
+            patterns).
+          </li>
+          <li>
+            <strong>Possibilities:</strong> Tiles start with all possible
+            patterns. As constraints are applied, invalid possibilities are
+            removed.
+          </li>
+          <li>
+            <strong>Connectors:</strong> Connectors define how tiles can connect
+            to each other. For example, "aaa" can connect to "aba" but not to
+            "bbb."
+          </li>
+          <li>
+            <strong>Collapse:</strong> A tile collapses when its state is
+            finalized, and this state influences adjacent tiles by reducing
+            their possibilities.
+          </li>
+        </ul>
+        <h2 className="text-xl font-semibold mb-2">
+          Pattern Generation Process:
+        </h2>
+        <div className="ml-4 mb-4">
+          <ol className="list-decimal list-inside">
+            <li>
+              <strong>Initialization:</strong> A grid of tiles is created, where
+              each tile starts with all possible patterns.
+            </li>
+            <li>
+              <strong>Tile Selection:</strong> A tile with the fewest
+              possibilities is chosen (preferably one with constraints applied).
+            </li>
+            <li>
+              <strong>State Assignment:</strong> A random valid pattern is
+              selected for the tile based on its remaining possibilities.
+            </li>
+            <li>
+              <strong>Propagation:</strong> The constraints of the collapsed
+              tile are propagated to adjacent tiles, reducing their
+              possibilities.
+            </li>
+            <li>
+              <strong>Repeat:</strong> The process continues until all tiles are
+              collapsed or no valid configurations remain.
+            </li>
+          </ol>
+        </div>
+        <h2 className="text-xl font-semibold mb-2">Applications:</h2>
+        <p>
+          The WFC algorithm is ideal for generating infinite, non-repetitive
+          patterns such as:
+        </p>
+        <ul className="list-disc list-inside">
+          <li>Procedural terrains in games.</li>
+          <li>Custom wallpaper or texture generation.</li>
+          <li>Level designs with consistent constraints.</li>
+        </ul>
       </div>
     </>
   );
